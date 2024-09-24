@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .title-xl {
+      @apply text-[48px] leading-[130%] font-extrabold;
+      font-family: 'Baloo 2', cursive;
+    }
+    .title-l {
+      @apply text-[32px] leading-[130%] font-extrabold;
+      font-family: 'Baloo 2', cursive;
+    }
+    .title-m {
+      @apply text-[24px] leading-[130%] font-extrabold;
+      font-family: 'Baloo 2', cursive;
+    }
+    .title-s {
+      @apply text-[20px] leading-[130%] font-bold;
+      font-family: 'Baloo 2', cursive;
+    }
+    .title-xs {
+      @apply text-[18px] leading-[130%] font-bold;
+      font-family: 'Baloo 2', cursive;
+    }
+    .Text-L{
+        @apply text-[20px] leading-[130%] font-extrabold;
+        font-family:'Roboto', sans-serif
+    }
+
+    .Text-M{
+        @apply text-[16px] leading-[130%] font-normal;
+        font-family:'Roboto',sans-serif
+    }
+
+    .Text-S{
+        @apply text-[14px] leading-[130%]
+        font-normal;
+        font-family:'Roboto',sans-serif
+
+    }
+    .Text-XS{
+        @apply text-[20px]
+        leading-[130%]
+        font-bold;
+        font-family:'Roboto',sans-serif
+    }
+    .Tag{
+        @apply text-[10px] leading-[130%] font-bold;
+        font-family:'Roboto',sans-serif
+    }
+    .Button-G{
+        @apply text-[14px] leading-[160%] font-bold; 
+        font-family:'Roboto',sans-serif
+
+    }.Button-M{
+        @apply text-[12px] leading-[160%] font-normal;
+        font-family:'Roboto',sans-serif
+    }
+
+  }
