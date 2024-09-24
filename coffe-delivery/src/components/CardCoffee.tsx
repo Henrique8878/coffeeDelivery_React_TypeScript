@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import iconsMinus from '../assets/icons/Minus.png'
 import iconsPlus from '../assets/icons/Plus.png'
 import imgCart from '../assets/icons/shoppingCartPurple.png'
+import { useContext } from 'react'
+import { contextApp } from '../Contexts/contextMain'
 
 interface typeObjectCoffee{
     id:number,
@@ -29,12 +31,14 @@ interface dataCard{
     coffeeQuantity:number,
     objectCoffee:typeObjectCoffee[],
     setObjectCoffee:React.Dispatch<React.SetStateAction<typeObjectCoffee[]>>,
-    setHaveProduct:React.Dispatch<React.SetStateAction<boolean>>
+    setHaveProduct:React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffeeContent,coffeeSubtitle,
-                            coffeeSubtitle2,isSubtitle,coffeePrice,coffeeQuantity,objectCoffee,setObjectCoffee,setHaveProduct}:dataCard){
+                            coffeeSubtitle2,isSubtitle,coffeePrice,coffeeQuantity,objectCoffee,
+                            setObjectCoffee,setHaveProduct}:dataCard){
 
+        const {storesReducerValue,sumValuesCoffees} = useContext(contextApp)
 
         function verifyEmptyObject(){
           let searchCoffee = objectCoffee.find((coffee)=>{
@@ -50,6 +54,9 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
 
         useEffect(()=>{
             verifyEmptyObject()
+            if(sumValuesCoffees){
+                sumValuesCoffees()
+            }
         },[objectCoffee])
 
         function addCoffees(){
@@ -61,6 +68,7 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
                 }
             })
             setObjectCoffee(updateCoffees)
+            
         }
 
         function removeCoffees(value:number){
@@ -76,7 +84,6 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
             }else{
                 return 
             }
-            console.log(objectCoffee)
         }
 
     return(

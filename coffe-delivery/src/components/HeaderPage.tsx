@@ -2,6 +2,7 @@ import Logo from '../assets/icons/Logo.png'
 import LogoFull from '../assets/icons/State=Full.png'
 import logoLocationHeader from '../assets/icons/logoLocationHeader.png'
 import cartHeader from '../assets/icons/Cart.png'
+import { Link } from 'react-router-dom'
 
 interface typeObjectCoffee{
     id:number,
@@ -29,12 +30,12 @@ export function HeaderPage({Url,haveProduct}:typeHeaders){
                     </figure>
                     <div className='flex gap-3'>
                        <img src={logoLocationHeader} alt="" />
-                        <a href={Url} className='flex items-center justify-center'>
+                        <Link to={Url} className='flex items-center justify-center'>
                             {haveProduct?
                                 (<img src={LogoFull} alt="" className=' w-[2.5rem] h-[2.5rem] cursor-pointer' />):
                                 (<img src={cartHeader} alt="" className=' w-[2.5rem] h-[] cursor-pointer' />)   
                             }
-                        </a>
+                        </Link>
                     </div>
             </header>
         </>

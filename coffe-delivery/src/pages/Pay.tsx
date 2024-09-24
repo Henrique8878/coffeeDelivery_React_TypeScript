@@ -1,4 +1,4 @@
-
+import { useContext, useState } from 'react'
 import { ButtonAddCoffee } from '../components/ButtonAddCoffee'
 import { ButtonRemoveCoffee } from '../components/ButtonRemoveCoffee'
 import { HeaderPage } from '../components/HeaderPage'
@@ -22,12 +22,39 @@ import imgCubano from '../assets/images_coffes/Cubano.png'
 import imgHavaiano from '../assets/images_coffes/havaiano.png'
 import imgArabe from '../assets/images_coffes/arabe.png'
 import imgIrland from '../assets/images_coffes/Irland.png'
+import { contextApp } from '../Contexts/contextMain'
 
 
 export function Pay(){
+   const {haveProduct,objectCoffee,isSubtitle,sumValuesCoffees,storesReducerValue} = useContext(contextApp)
+   const [valueDelivery,setvalueDelivery] = useState(3.50)
+
+   function transformNumberToString(value:number){
+    if(value<10){
+        let newString = String(value)
+        if(newString.includes(".")){
+            let replaceString = newString.replace(".",",")
+            let addZeroString = replaceString.padEnd(4,"0")
+            return addZeroString
+        }else{
+            let addCommaAndZero = newString.padEnd(4,",00")
+            return addCommaAndZero
+        }
+    }else{
+        let newString = String(value)
+        if(newString.includes(".")){
+            let replaceString = newString.replace(".",",")
+            let addZeroString = replaceString.padEnd(5,"0")
+            return addZeroString
+        }else{
+            let addCommaAndZero = newString.padEnd(5,",00")
+            return addCommaAndZero
+        }
+    }    
+}    
     return(
         <>
-            <HeaderPage Url="http://localhost:5173/delivery"/>
+            <HeaderPage Url="http://localhost:5173/delivery" haveProduct = {haveProduct}/>
             <main className="flex justify-between gap-5 mx-40 h-[32.93rem]">
                 <div className="w-[60%] h-[100%]">
                     <h3 className="title-xs h-[5%]">Complete seu pedido</h3>
@@ -110,18 +137,17 @@ export function Pay(){
                     <h3 className='title-xs h-[5%]'>Cafés selecionados</h3>
                     <article className='w-[100%] rounded-tl-md rounded-tr-3xl rounded-bl-3xl rounded-br-md p-9 space-y-5 bg-base-card'>
                      <PayCardCoffee/>
-                     <PayCardCoffee/>
                         <div className='flex justify-between'>
                             <span>Total de itens</span>
-                            <span>R$ 19,80</span>
+                            <span>R$ {storesReducerValue?transformNumberToString(storesReducerValue):<>0</>}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span>Entrega</span>
-                            <span>R$ 3,50</span>
+                            <span>R$ {transformNumberToString(valueDelivery)}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span><strong>Total</strong></span>
-                            <span><strong>R$ 33,20</strong></span>
+                            <span><strong>R$ {storesReducerValue?transformNumberToString((valueDelivery+storesReducerValue)):0}</strong></span>
                         </div>
                         <button className='w-[100%] h-[2.875rem] Button-G text-gray-100 bg-yellow rounded-md hover:bg-yellow-dark'>
                             <span>CONFIRMAR PEDIDO</span>
@@ -133,6 +159,7 @@ export function Pay(){
     )
 }
                     
+            
 
                       
 

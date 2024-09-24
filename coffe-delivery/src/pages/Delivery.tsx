@@ -2,9 +2,12 @@ import motoboyDelivery from '../assets/icons/motoboyDelivery.png'
 import circleLocalization from '../assets/icons/circleLocalization.png'
 import circleTimer from '../assets/icons/circleTimer.png'
 import circleDollar from '../assets/icons/circleDollar.png'
+import { useContext } from 'react'
+import { contextApp } from '../Contexts/contextMain'
 
 
 export function Delivery(){
+    const {storesReducerValue} = useContext(contextApp)
     return(
         <>
             <main className="flex justify-around mx-40 mt-24">
@@ -33,6 +36,7 @@ export function Delivery(){
                             <div className='flex flex-col'>
                                 <span>Pagamento na entrega</span>
                                 <span><strong>Cartão de crédito</strong></span>
+                                <h1 className='text-3xl'>{storesReducerValue}</h1>
                             </div>
                         </div>
                     </div>
