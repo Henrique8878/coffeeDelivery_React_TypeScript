@@ -17,6 +17,7 @@ export function ButtonAddCoffee({value,coffeeID}:typeButtonAdd){
         if(sumValuesCoffees){
             sumValuesCoffees()
         }
+        console.log(objectCoffee)
     },[objectCoffee])
 
     function addCoffees(){
@@ -35,6 +36,7 @@ export function ButtonAddCoffee({value,coffeeID}:typeButtonAdd){
     }
 
     function removeCoffees(value:number){
+        
         if(value>0){
             let updateCoffees = objectCoffee&&objectCoffee.map((coffee)=>{
                 if(coffee.id==coffeeID){

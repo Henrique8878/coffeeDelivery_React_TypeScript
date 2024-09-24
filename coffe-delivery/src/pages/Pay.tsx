@@ -139,7 +139,7 @@ export function Pay(){
                      <PayCardCoffee/>
                         <div className='flex justify-between'>
                             <span>Total de itens</span>
-                            <span>R$ {storesReducerValue?transformNumberToString(storesReducerValue):<>0</>}</span>
+                            <span>R$ {storesReducerValue?transformNumberToString(storesReducerValue):objectCoffee?.find((coffee)=>coffee.coffeeQuantity!=0)?storesReducerValue&&transformNumberToString(storesReducerValue):0}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span>Entrega</span>
