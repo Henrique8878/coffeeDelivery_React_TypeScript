@@ -22,13 +22,37 @@ import imgCubano from '../assets/images_coffes/Cubano.png'
 import imgHavaiano from '../assets/images_coffes/havaiano.png'
 import imgArabe from '../assets/images_coffes/arabe.png'
 import imgIrland from '../assets/images_coffes/Irland.png'
-import { contextApp } from '../Contexts/contextMain'
+import { contextApp } from '../Contexts/ContextMain'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { Link } from 'react-router-dom'
 
 
 export function Pay(){
-   const {haveProduct,objectCoffee,isSubtitle,sumValuesCoffees,storesReducerValue} = useContext(contextApp)
+   const {haveProduct,objectCoffee,isSubtitle,sumValuesCoffees,storesReducerValue,setTypePay,setFormDataObject,typePay} = useContext(contextApp)
    const [valueDelivery,setvalueDelivery] = useState(3.50)
 
+   const formValidationPattern = zod.object({
+    inp_cep:zod.string().min(9,"O cep precisa ter no mínimo 9 caracteres").max(9,"O cep pode ter no máximo 9 caracteres"),
+    inp_rua:zod.string().min(1, "").max(40, "o campo rua pode ter no máximo 20 caracteres"),
+    inp_num:zod.number().min(1),
+    inp_complemento:zod.string().min(3,"O campo complemento tem que ter no mínimo 5 caracteres").max(40,"O campo complemento pode ter no máximo 40 caracteres"),
+    inp_bairro:zod.string().min(1).max(20),
+    inp_cidade:zod.string().min(1).max(20),
+    inp_uf:zod.string().min(2).max(2)
+})
+
+   const {register,handleSubmit,watch,formState} = useForm({
+    resolver:zodResolver(formValidationPattern)
+   })
+   const watchCep = watch('inp_cep')
+
+   function handleChangedForm(data:any){
+        setFormDataObject(data)
+    }
+    console.log(formState.errors)
+    
    function transformNumberToString(value:number){
     if(value<10){
         let newString = String(value)
@@ -54,8 +78,8 @@ export function Pay(){
 }    
     return(
         <>
-            <HeaderPage Url="http://localhost:5173/delivery" haveProduct = {haveProduct}/>
-            <main className="flex justify-between gap-5 mx-40 h-[32.93rem]">
+            <HeaderPage Url="http://localhost:5173/pay" haveProduct = {haveProduct}/>
+            <form className="flex justify-between gap-5 mx-40 h-[32.93rem]" onSubmit={handleSubmit(handleChangedForm)}>
                 <div className="w-[60%] h-[100%]">
                     <h3 className="title-xs h-[5%]">Complete seu pedido</h3>
                     <article className='flex flex-col gap-4 w-[100%] h-[95%]'>
@@ -67,16 +91,16 @@ export function Pay(){
                                 <span className='Text-S text-base-text'>Informe o endereço onde deseja receber seu pedido</span>
                                 </div>
                             </div>
-                            <input type="text" name="" id="" placeholder='CEP' className='bg-base-input w-[12.5rem] h-[2.5rem] p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black'/>
-                            <input type="text" name="" id="" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Rua'/>
+                            <input type="text"  id="inp_cep" placeholder='CEP' className='bg-base-input w-[12.5rem] h-[2.5rem] p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black'{...register('inp_cep')}/>
+                            <input type="text"  id="inp_rua" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Rua'{...register('inp_rua')}/>
                             <div className='grid grid-cols-[1fr_2fr] gap-2'>
-                                <input type="number" name="" id="" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder = 'Número'/>
-                                <input type="text" name="" id="" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder = 'Complemento'/>
+                                <input type="number" id="inp_num" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black max-1000:w-20' placeholder = 'Número' {...register('inp_num',{valueAsNumber:true})}/>
+                                <input type="text"  id="inp_complemento" className='h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder = 'Complemento'{...register('inp_complemento')}/>
                             </div>
                             <div className='grid grid-cols-[3fr_5fr_1fr] gap-2'>
-                                <input type="text" name="" id="" className='w-full h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Bairro'/>
-                                <input type="text" name="" id="" className='w-full h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Cidade'/>
-                                <select name="" id="" className='w-full h-[2.5rem] Text-S text-base-label bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black'>
+                                <input type="text"  id="inp_bairro" className='w-full h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Bairro' {...register('inp_bairro')}/>
+                                <input type="text" id="inp_cidade" className='w-full h-[2.5rem] bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' placeholder='Cidade' {...register('inp_cidade')}/>
+                                <select  id="inp_uf" className='w-full h-[2.5rem] Text-S text-base-label bg-base-input rounded-md p-2 outline-none focus:border border-yellow-dark focus:placeholder:text-black' {...register('inp_uf')}>
                                     <option value="">UF</option>
                                     <option value="AC">AC</option>
                                     <option value="AL">AL</option>
@@ -117,17 +141,17 @@ export function Pay(){
                                 </div>
                             </div> 
                             <div className='grid grid-cols-3 gap-3'>
-                                <button className=' flex items-center justify-center gap-3 h-[3.18rem]  bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark'>
-                                    <img src={creditCard} alt="" />
-                                    <span>CARTÃO DE CRÉDITO</span>
+                                <button className=' flex items-center justify-center gap-3 h-[3.18rem]  bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark' onClick={()=>setTypePay("CARTÃO DE CRÉDITO")}>
+                                    <img src={creditCard} alt="" className='w-[1rem] h-[1rem]'/>
+                                    <span className='Button-M max-1000:text-[0.6rem]'>CARTÃO DE CRÉDITO</span>
                                 </button>
-                                <button  className=' flex items-center justify-center gap-3 h-[3.18rem]  bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark'>
-                                    <img src={bank} alt="" />
-                                    <span>CARTÃO DE DÉBITO</span>
+                                <button  className=' flex items-center justify-center gap-3 h-[3.18rem]  bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark' onClick={()=>setTypePay("CARTÃO DE DÉBITO")}>
+                                    <img src={bank} alt="" className='w-[1rem] h-[1.18rem]'/>
+                                    <span  className='Button-M max-1000:text-[0.6rem]'>CARTÃO DE DÉBITO</span>
                                 </button>
-                                <button  className=' flex items-center justify-center gap-3 h-[3.18rem] bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark'>
-                                    <img src={moneyNote} alt="" />
-                                    <span>DINHEIRO</span>
+                                <button  className=' flex items-center justify-center gap-3 h-[3.18rem] bg-base-button rounded-md hover:bg-gray-300  focus:border border-purple-dark' onClick={()=>setTypePay("DINHEIRO")}>
+                                    <img src={moneyNote} alt="" className='w-[1rem] h-[1.18rem]'/>
+                                    <span  className='Button-M max-1000:text-[0.6rem]'>DINHEIRO</span>
                                 </button>
                             </div>
                         </div>
@@ -139,7 +163,7 @@ export function Pay(){
                      <PayCardCoffee/>
                         <div className='flex justify-between'>
                             <span>Total de itens</span>
-                            <span>R$ {storesReducerValue?transformNumberToString(storesReducerValue):objectCoffee?.find((coffee)=>coffee.coffeeQuantity!=0)?storesReducerValue&&transformNumberToString(storesReducerValue):0}</span>
+                            <span>R$ {(storesReducerValue?transformNumberToString(storesReducerValue):0)}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span>Entrega</span>
@@ -149,16 +173,27 @@ export function Pay(){
                             <span><strong>Total</strong></span>
                             <span><strong>R$ {storesReducerValue?transformNumberToString((valueDelivery+storesReducerValue)):0}</strong></span>
                         </div>
-                        <button className='w-[100%] h-[2.875rem] Button-G text-gray-100 bg-yellow rounded-md hover:bg-yellow-dark'>
-                            <span>CONFIRMAR PEDIDO</span>
-                        </button>
+                        {typePay==""?  
+                            <button id ="btn_confirm" type='submit' className='w-[100%] h-[2.875rem] Button-G text-gray-100 bg-yellow rounded-md hover:bg-yellow-dark cursor-pointer' disabled = {!watchCep}>
+                                <span className='Button-M'>CONFIRMAR PEDIDO</span>
+                            </button>
+                                : 
+                            <Link to={'http://localhost:5173/delivery'}>
+                            <button id ="btn_confirm" type='submit' className='w-[100%] h-[2.875rem] mt-5 Button-G text-gray-100 bg-yellow rounded-md hover:bg-yellow-dark cursor-pointer' disabled = {!watchCep}>
+                                <span className='Button-M'>CONFIRMAR PEDIDO</span>
+                            </button>
+                            </Link>
+                        }
                     </article>
                 </div>
-            </main>
+            </form>
         </>
     )
 }
                     
+                        
+                       
+
             
 
                       

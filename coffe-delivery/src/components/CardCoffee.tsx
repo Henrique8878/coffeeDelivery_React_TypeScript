@@ -3,7 +3,7 @@ import iconsMinus from '../assets/icons/Minus.png'
 import iconsPlus from '../assets/icons/Plus.png'
 import imgCart from '../assets/icons/shoppingCartPurple.png'
 import { useContext } from 'react'
-import { contextApp } from '../Contexts/contextMain'
+import { contextApp } from '../Contexts/ContextMain'
 
 interface typeObjectCoffee{
     id:number,
@@ -68,8 +68,8 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
                 }
             })
             setObjectCoffee(updateCoffees)
-            
         }
+            
 
         function removeCoffees(value:number){
             if(value>0){
@@ -89,25 +89,25 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
     return(
         <>
                 <article className='flex flex-col items-center bg-base-card w-64 h-[19.375rem] rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl px-5 pb-5 gap-4'>
-                                <img src={coffeePicture} alt="" className='-mt-5'/>
+                                <img src={coffeePicture} alt="" className='-mt-5 w-[7.5rem] h-[7.5rem]'/>
                                 {isSubtitle==1?
                                     (
                                         <div className='flex gap-2'>
-                                            <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeType}</span>
-                                            <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeSubtitle}</span>
+                                            <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeType}</span>
+                                            <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeSubtitle}</span>
                                         </div>
                                     )
                                     :isSubtitle==0?
                                     (
                                         
-                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeType}</span>
+                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeType}</span>
                                     )
                                     :
                                     (
                                     <div className='flex gap-2'>
-                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeType}</span>
-                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeSubtitle}</span>
-                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1'>{coffeeSubtitle2}</span>
+                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeType}</span>
+                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeSubtitle}</span>
+                                        <span className='Tag bg-yellow-light text-yellow-dark rounded-md p-1 text-[0.625rem]'>{coffeeSubtitle2}</span>
                                     </div>
                                     )
                                 }
@@ -123,7 +123,7 @@ export function CardCoffee({coffeeId,coffeeType,coffeePicture,coffeeTitle,coffee
                                         <img src={iconsPlus} alt=""className='w-[0.875rem] h-[0.875rem] bg-brand-purple hover:cursor-pointer' onClick={addCoffees}/>
                                     </div>
                                     <div>
-                                        <img src={imgCart} alt="" />
+                                        <img src={imgCart} alt="" className="w-[2.375rem] h-[2.375rem]"/>
                                     </div>
                                 </div>
                 </article>

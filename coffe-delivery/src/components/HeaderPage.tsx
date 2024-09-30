@@ -26,10 +26,10 @@ export function HeaderPage({Url,haveProduct}:typeHeaders){
         <>
              <header className='flex justify-between mx-40 my-8'>
                     <figure>
-                        <img src={Logo} alt="" />
+                        <img src={Logo} alt=""className='w-[5.309rem] h-[2.5rem]' />
                     </figure>
                     <div className='flex gap-3'>
-                       <img src={logoLocationHeader} alt="" />
+                       <img src={logoLocationHeader} alt="" className='w-[9.375rem] h-[2.375rem]'/>
                         <Link to={Url} className='flex items-center justify-center'>
                             {haveProduct?
                                 (<img src={LogoFull} alt="" className=' w-[2.5rem] h-[2.5rem] cursor-pointer' />):

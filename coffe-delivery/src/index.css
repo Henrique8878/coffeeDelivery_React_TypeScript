@@ -4,58 +4,83 @@
 
 @layer components {
     .title-xl {
-      @apply text-[48px] leading-[130%] font-extrabold;
+      @apply text-[3rem] leading-[130%] font-extrabold;
       font-family: 'Baloo 2', cursive;
     }
     .title-l {
-      @apply text-[32px] leading-[130%] font-extrabold;
+      @apply text-[2rem] leading-[130%] font-extrabold;
       font-family: 'Baloo 2', cursive;
     }
     .title-m {
-      @apply text-[24px] leading-[130%] font-extrabold;
+      @apply text-[1.5rem] leading-[130%] font-extrabold;
       font-family: 'Baloo 2', cursive;
     }
     .title-s {
-      @apply text-[20px] leading-[130%] font-bold;
+      @apply text-[1.25rem] leading-[130%] font-bold;
       font-family: 'Baloo 2', cursive;
     }
     .title-xs {
-      @apply text-[18px] leading-[130%] font-bold;
+      @apply text-[1.125rem] leading-[130%] font-bold;
       font-family: 'Baloo 2', cursive;
     }
     .Text-L{
-        @apply text-[20px] leading-[130%] font-extrabold;
+        @apply text-[1.25rem] leading-[130%] font-extrabold;
         font-family:'Roboto', sans-serif
     }
 
     .Text-M{
-        @apply text-[16px] leading-[130%] font-normal;
+        @apply text-[1rem] leading-[130%] font-normal;
         font-family:'Roboto',sans-serif
     }
 
     .Text-S{
-        @apply text-[14px] leading-[130%]
+        @apply text-[0.875rem] leading-[130%]
         font-normal;
         font-family:'Roboto',sans-serif
 
     }
     .Text-XS{
-        @apply text-[20px]
+        @apply text-[1.25rem]
         leading-[130%]
         font-bold;
         font-family:'Roboto',sans-serif
     }
     .Tag{
-        @apply text-[10px] leading-[130%] font-bold;
+        @apply text-[0.625rem] leading-[130%] font-bold;
         font-family:'Roboto',sans-serif
     }
     .Button-G{
-        @apply text-[14px] leading-[160%] font-bold; 
+        @apply text-[0.875rem] leading-[160%] font-bold; 
         font-family:'Roboto',sans-serif
 
     }.Button-M{
-        @apply text-[12px] leading-[160%] font-normal;
+        @apply text-[0.75rem] leading-[160%] font-normal;
         font-family:'Roboto',sans-serif
     }
 
   }
+
+  @media(max-width:320px){
+    html{
+      font-size:25%
+    }
+  }
+
+  @media (min-width:321px) and (max-width:399px){
+    html{
+      font-size:40%
+    }
+  }
+
+  @media(min-width:400px) and (max-width:430px){
+    html{
+      font-size:48%
+    }
+  }
+
+  @media(min-width:600px) and (max-width:820px){
+    html{
+      font-size:90%
+    }
+  }
+  

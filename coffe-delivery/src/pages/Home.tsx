@@ -27,7 +27,7 @@ import imgCubano from '../assets/images_coffes/Cubano.png'
 import imgHavaiano from '../assets/images_coffes/havaiano.png'
 import imgArabe from '../assets/images_coffes/arabe.png'
 import imgIrland from '../assets/images_coffes/Irland.png'
-import { contextApp } from '../Contexts/contextMain'
+import { contextApp } from '../Contexts/ContextMain'
 
 interface typeObjectCoffee{
     id:number,
@@ -66,12 +66,17 @@ export function Home(){
             }
         }    
     }
+
     const {haveProduct,objectCoffee,setHaveProduct,setIsSubtitle,setObjectCoffee,sumValuesCoffees,storesReducerValue} = useContext(contextApp)
-    
       return(
           <>
               <div id="app" className='h-screen w-screen'>
-                  <HeaderPage Url="http://localhost:5173/pay" haveProduct={haveProduct}/>
+                {objectCoffee?.find((coffee)=>coffee.coffeeQuantity!=0)? 
+                <HeaderPage Url="http://localhost:5173/pay" haveProduct={haveProduct}/>
+                :
+                <HeaderPage Url="http://localhost:5173/" haveProduct={haveProduct}/>
+                }
+                 
                   <main className='mx-40 Title '>
                       <section className='flex py-20'>
                           <div className='flex flex-col w-[4
@@ -83,21 +88,21 @@ export function Home(){
                               <article className='flex flex-col gap-6'>
                                   <section className='flex gap-8'>
                                           <div className='flex items-center gap-2'>
-                                                  <img src={cartWhiteSmall} alt="" className=''/>
+                                                  <img src={cartWhiteSmall} alt="" className='w-[2rem] h-[2rem]'/>
                                                   <span className='Text-M'>Compra simples e segura</span>
                                           </div>
                                           <div className='flex  items-center gap-2'>
-                                                  <img src={iconBox} alt="" />
+                                                  <img src={iconBox} alt=""  className='w-[2rem] h-[2rem]' />
                                                   <span className='Text-M'>Embalagem mantém o café intacto</span>
                                           </div>
                                     </section>
                                     <section className='flex gap-8'>
                                           <div className='flex items-center gap-2'>
-                                                  <img src={iconTimer} alt="" />
+                                                  <img src={iconTimer} alt=""  className='w-[2rem] h-[2rem]'/>
                                                   <span className='Text-M'>Entrega rápida e rastreada</span>
                                           </div>
                                           <div className='flex  items-center gap-2'>
-                                                  <img src={iconCoffe} alt="" />
+                                                  <img src={iconCoffe} alt=""  className='w-[2rem] h-[2rem]'/>
                                                   <span className='Text-M'>O café chega fresquinho até você</span>
                                           </div>
                                          

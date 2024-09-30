@@ -56,6 +56,9 @@ export default {
         "base-card":"#f3f2f2",
         "background":"#fafafa",
         "white":"#ffffff"
+      },
+      screens:{
+        'max-1000':{'max':'1000px'}
       }
    },
   },

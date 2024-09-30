@@ -28,6 +28,16 @@ interface typeObjectCoffee{
     coffeeQuantity:number
 }
 
+interface typeFormDataObject{
+    inp_cep?:string,
+    inp_rua?:string,
+    inp_num?:number,
+    inp_complemento?:string,
+    inp_bairro?:string,
+    inp_cidade?:string,
+    inp_uf?:string
+}
+
 interface typeContext{
     haveProduct:boolean,
     setHaveProduct?:React.Dispatch<React.SetStateAction<boolean>>,
@@ -37,7 +47,11 @@ interface typeContext{
     setObjectCoffee?:React.Dispatch<React.SetStateAction<typeObjectCoffee[]>>,
     sumValuesCoffees?:()=>void,
     storesReducerValue?:number,
-    transformNumberToString:(value:number)=>string
+    transformNumberToString:(value:number)=>string,
+    setTypePay:React.Dispatch<React.SetStateAction<string>>,
+    typePay:string,
+    setFormDataObject:React.Dispatch<React.SetStateAction<typeFormDataObject>>,
+    formDataObject:typeFormDataObject
 }
 
 interface typeNodeChildren{
@@ -206,16 +220,17 @@ export function ContextMain({children}:typeNodeChildren){
 
 
     ])
+    const [typePay,setTypePay] = useState("")
+    const [formDataObject,setFormDataObject] = useState({})
 
 function sumValuesCoffees(){
     let valueFinal = objectCoffee.reduce((accumulator:number,product:typeObjectCoffee)=>{
         if(product.coffeeQuantity!=0){
-            return accumulator+(product.coffeePrice)*product.coffeeQuantity
+            return accumulator+((product.coffeePrice)*(product.coffeeQuantity))
         }else{
             return accumulator
         }
     },0)
-    console.log(valueFinal)
    setStoresReducerValue(valueFinal)
 }
 
@@ -246,7 +261,7 @@ function transformNumberToString(value:number){
 return(
     <contextApp.Provider 
     value={{haveProduct,setHaveProduct,isSubtitle,setIsSubtitle,
-    objectCoffee,setObjectCoffee,sumValuesCoffees,storesReducerValue,transformNumberToString}}
+    objectCoffee,setObjectCoffee,sumValuesCoffees,storesReducerValue,transformNumberToString,setTypePay,typePay,setFormDataObject,formDataObject}}
     >
         {children}
     </contextApp.Provider>
